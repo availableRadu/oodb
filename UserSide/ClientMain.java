@@ -3,7 +3,6 @@ import java.net.*;
 import java.util.*;
 import java.util.regex.*;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 
 public class ClientMain{
 	public static void main(String[] args) throws Exception {
@@ -135,4 +134,30 @@ public class ClientMain{
 			}
 		}
 	}
+	
+	public static boolean isValidIPAddress(String ip)
+    {
+		if (ip == null) {
+            return false;
+        }
+        String zeroTo255 = "(\\d{1,2}|(0|1)\\" + "d{2}|2[0-4]\\d|25[0-5])";
+        String regex = zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255 + "\\." + zeroTo255;
+		return Pattern.compile(regex).matcher(ip).matches();
+    }
+	
+	public static void sendInfoCode(int n, Socket serveur) throws Exception
+	{
+		DataOutputStream dataOutputStream = new DataOutputStream(serveur.getOutputStream());
+		dataOutputStream.writeInt(n);	
+		dataOutputStream.flush();
+		//sendText(Integer.toString(n), serveur);
+	}
+	
+	private static void sendText(String text, Socket serveur) throws Exception
+	{
+		PrintWriter printWriter = new PrintWriter(new BufferedWriter( new OutputStreamWriter( serveur.getOutputStream() ) ), true);
+		printWriter.println(text);
+		printWriter.flush();
+	}
+	
 }
