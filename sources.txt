@@ -1,4 +1,5 @@
 ServerSide/User.java
 ServerSide/ServerMain.java
 ServerSide/UserThread.java
+ServerSide/CustomClass.java
 UserSide/ClientMain.java

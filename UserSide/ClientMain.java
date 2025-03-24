@@ -133,6 +133,8 @@ public class ClientMain{
 					a = false;
 			}
 		}
+		
+		dataInputStream.close();
 	}
 	
 	public static boolean isValidIPAddress(String ip)
@@ -158,6 +160,19 @@ public class ClientMain{
 		PrintWriter printWriter = new PrintWriter(new BufferedWriter( new OutputStreamWriter( serveur.getOutputStream() ) ), true);
 		printWriter.println(text);
 		printWriter.flush();
+	}
+	
+	private void sendObject(Object o, Socket serveur) {
+		try {
+		ObjectOutputStream out = new ObjectOutputStream( serveur.getOutputStream() );
+		out.writeObject(o);
+		}catch(Exception e){e.printStackTrace();}
+	}
+	
+	private Object getObject(Socket serveur) throws Exception
+	{
+		ObjectInputStream in = new ObjectInputStream( serveur.getInputStream() );
+		return in.readObject();
 	}
 	
 }

@@ -4,13 +4,13 @@ import java.util.*;
 
 public class UserThread extends Thread{
 	
-	Socket sock;
-	User client;
-	String pseudo;
-	DataOutputStream dataOutputStream;
-	DataInputStream dataInputStream;
-	BufferedReader in;
-	PrintWriter out;
+	private Socket sock;
+	private User client;
+	private String pseudo;
+	private DataOutputStream dataOutputStream;
+	private DataInputStream dataInputStream;
+	private BufferedReader in;
+	private PrintWriter out;
 	
 	public UserThread(Socket sock, User utilisateurs)
 	{
@@ -63,11 +63,31 @@ public class UserThread extends Thread{
 					System.out.println("comment ?");
 			}
 		}
+		
+		in.close();
+		out.close();
+		dataInputStream.close();
+		dataOutputStream.close();
+		
 		}catch(Exception e){e.printStackTrace();}
 	}
 	
 	private String recieveText() throws Exception
 	{
 		return new BufferedReader(new InputStreamReader(this.sock.getInputStream())).readLine();
+	}
+	
+	private void sendObject(Object o) 
+	{
+		try{
+		ObjectOutputStream out = new ObjectOutputStream( sock.getOutputStream() );
+		out.writeObject(o);
+		}catch(Exception e){e.printStackTrace();}
+	}
+	
+	private Object getObject() throws Exception
+	{
+		ObjectInputStream in = new ObjectInputStream( sock.getInputStream() );
+		return in.readObject();
 	}
 }
