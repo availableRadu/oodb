@@ -6,6 +6,11 @@ import java.time.*;
 
 public class ClientMain{
 	public static void main(String[] args) throws Exception {
+		Socket serveur = new Socket("192.168.1.100",4200);
+		CustomClass c = (CustomClass) getObject(serveur);
+		System.out.println(c.toString());
+		
+		
 		//initialise files
 		File create = new File("Download");
 		if(!create.exists()) {
@@ -53,7 +58,7 @@ public class ClientMain{
 					System.out.println("Reponse invalide");
 			}
 		}
-		Socket serveur = new Socket(ip,4200);
+		//Socket serveur = new Socket(ip,4200);
 		//Socket serveur = new Socket("192.168.1.16",4200);
 		
 		//log in process
@@ -162,14 +167,14 @@ public class ClientMain{
 		printWriter.flush();
 	}
 	
-	private void sendObject(Object o, Socket serveur) {
+	private static void sendObject(Object o, Socket serveur) {
 		try {
 		ObjectOutputStream out = new ObjectOutputStream( serveur.getOutputStream() );
 		out.writeObject(o);
 		}catch(Exception e){e.printStackTrace();}
 	}
 	
-	private Object getObject(Socket serveur) throws Exception
+	private static Object getObject(Socket serveur) throws Exception
 	{
 		ObjectInputStream in = new ObjectInputStream( serveur.getInputStream() );
 		return in.readObject();

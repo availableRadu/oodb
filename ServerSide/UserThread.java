@@ -26,7 +26,12 @@ public class UserThread extends Thread{
 	
 	public void run()
 	{
+		CustomClass c = new CustomClass();
+		c.setField01(7);
+		sendObject(c);
+		
 		try {
+			
 		//gestion compte utilisateur :
 		Boolean a = true;
 		int infoCode = 0;
