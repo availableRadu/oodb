@@ -5,11 +5,22 @@ import java.util.regex.*;
 import java.time.*;
 
 public class ClientMain{
-	public static void main(String[] args) throws Exception {
-		Socket serveur = new Socket("192.168.1.100",4200);
-		CustomClass<String> c = (CustomClass<String>) getObject(serveur);
-		System.out.println(c.toString());
+	public static void main(String[] args) {
+		try{
 		
+		Socket serveur = new Socket("192.168.1.100",4200);
+		/*
+		CustomClass<String> cc = (CustomClass<String>) getObject(serveur);
+		System.out.println(cc.toString());
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("test"));
+		objectOutputStream.writeObject(cc);
+		*/
+		
+		ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("C:/Users/Radu/Desktop/cours_fac/2024-2025/semestre_4/info4b/projet/UserSide/test")));
+		@SuppressWarnings("unchecked")
+		CustomClass<String> cc = (CustomClass<String>) objectInputStream.readObject();
+		System.out.println(cc.toString());
+		sendObject(cc, serveur);
 		
 		//initialise files
 		File create = new File("Download");
@@ -140,6 +151,8 @@ public class ClientMain{
 		}
 		
 		dataInputStream.close();
+		
+		}catch(Exception e) { e.printStackTrace(); }
 	}
 	
 	public static boolean isValidIPAddress(String ip)
@@ -174,10 +187,14 @@ public class ClientMain{
 		}catch(Exception e){e.printStackTrace();}
 	}
 	
-	private static Object getObject(Socket serveur) throws Exception
+	private static Object getObject(Socket serveur)
 	{
+		Object o = null;
+		try{
 		ObjectInputStream in = new ObjectInputStream( serveur.getInputStream() );
-		return in.readObject();
+		o = in.readObject();
+		}catch(Exception e){e.printStackTrace();}
+		return o;
 	}
 	
 }

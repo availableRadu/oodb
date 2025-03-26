@@ -22,18 +22,27 @@ public class UserThread extends Thread{
 		this.in = new BufferedReader(new InputStreamReader(this.sock.getInputStream()));
 		this.out = new PrintWriter(new BufferedWriter( new OutputStreamWriter( this.sock.getOutputStream() ) ), true);
 		}catch(Exception e){e.printStackTrace();}
+		
 	}
 	
 	public void run()
 	{
+		/*
 		CustomClass<String> c = new CustomClass<String>("test");
 		c.setField01("v1","7");
 		sendObject(c);
+		*/
+
 		
 		try {
+		@SuppressWarnings("unchecked")
+		CustomClass<String> cc = (CustomClass<String>) getObject();
+		
+		System.out.println(cc.toString());		
+		
 			
 		//gestion compte utilisateur :
-		Boolean a = true;
+		Boolean a = false;                 //SWITCH TO TRUE TO MAKE IT WORK AGAIN
 		int infoCode = 0;
 		while(a) {
 			
@@ -65,7 +74,7 @@ public class UserThread extends Thread{
 					}
 					break;
 				default :
-					System.out.println("comment ?");
+					System.out.println("comment ?" + a);
 			}
 		}
 		
@@ -90,9 +99,13 @@ public class UserThread extends Thread{
 		}catch(Exception e){e.printStackTrace();}
 	}
 	
-	private Object getObject() throws Exception
+	private Object getObject()
 	{
-		ObjectInputStream in = new ObjectInputStream( sock.getInputStream() );
-		return in.readObject();
+		Object o = null;
+		try{
+		ObjectInputStream objectInputStream = new ObjectInputStream( this.sock.getInputStream() );
+		o = objectInputStream.readObject();
+		}catch(Exception e){e.printStackTrace();}
+		return o;
 	}
 }
