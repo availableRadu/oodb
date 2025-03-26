@@ -1,22 +1,30 @@
 import java.io.*;
 
-public class CustomClass implements Serializable {
+class CustomClass<T> implements Serializable {
 	
-	private int field01;
+	private String nameClass;
+	private String name01;
+	private T field01;
 	
-	public CustomClass() {}
+	public CustomClass(String name) 
+	{
+		this.nameClass = name;
+	}
 	
-	public int getField01() {
+	public T getField01() 
+	{
 		return this.field01;
 	}
 	
-	public void setField01(int i) 
+	public void setField01(String name, T i) 
 	{
+		this.name01 = name;
 		this.field01 = i;
 	}
 	
 	public String toString() 
 	{
-		return "Field01 : " + field01;
+		return "[" + this.nameClass + "]" + 
+		"{" + name01 + "=" + field01 + "}";
 	}
 }

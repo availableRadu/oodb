@@ -26,8 +26,8 @@ public class UserThread extends Thread{
 	
 	public void run()
 	{
-		CustomClass c = new CustomClass();
-		c.setField01(7);
+		CustomClass<String> c = new CustomClass<String>("test");
+		c.setField01("v1","7");
 		sendObject(c);
 		
 		try {

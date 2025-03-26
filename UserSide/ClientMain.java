@@ -7,7 +7,7 @@ import java.time.*;
 public class ClientMain{
 	public static void main(String[] args) throws Exception {
 		Socket serveur = new Socket("192.168.1.100",4200);
-		CustomClass c = (CustomClass) getObject(serveur);
+		CustomClass<String> c = (CustomClass<String>) getObject(serveur);
 		System.out.println(c.toString());
 		
 		

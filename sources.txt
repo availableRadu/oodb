@@ -1,5 +1,6 @@
+ServerSide/ServerMain.java
 ServerSide/CustomClass.java
 ServerSide/User.java
-ServerSide/ServerMain.java
 ServerSide/UserThread.java
+ServerSide/ClassModifier.java
 UserSide/ClientMain.java
