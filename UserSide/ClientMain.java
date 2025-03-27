@@ -14,7 +14,6 @@ public class ClientMain{
 		System.out.println(cc.toString());
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("test"));
 		objectOutputStream.writeObject(cc);
-		System.out.println(cc.getFields());
 		
 		
 		/*
