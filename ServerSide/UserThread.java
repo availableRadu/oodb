@@ -27,22 +27,23 @@ public class UserThread extends Thread{
 	
 	public void run()
 	{
-		/*
+		
 		CustomClass<String> c = new CustomClass<String>("test");
 		c.setField01("v1","7");
 		sendObject(c);
-		*/
+		
 
 		
 		try {
+		/*
 		@SuppressWarnings("unchecked")
 		CustomClass<String> cc = (CustomClass<String>) getObject();
-		
-		System.out.println(cc.toString());		
+		System.out.println(cc.toString());	
+		*/
 		
 			
 		//gestion compte utilisateur :
-		Boolean a = false;                 //SWITCH TO TRUE TO MAKE IT WORK AGAIN
+		Boolean a = true;                 //SWITCH TO TRUE TO MAKE IT WORK AGAIN
 		int infoCode = 0;
 		while(a) {
 			

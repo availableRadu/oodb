@@ -9,20 +9,24 @@ public class ClientMain{
 		try{
 		
 		Socket serveur = new Socket("192.168.1.100",4200);
-		/*
+		
 		CustomClass<String> cc = (CustomClass<String>) getObject(serveur);
 		System.out.println(cc.toString());
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("test"));
 		objectOutputStream.writeObject(cc);
-		*/
+		System.out.println(cc.getFields());
 		
+		
+		/*
 		ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("C:/Users/Radu/Desktop/cours_fac/2024-2025/semestre_4/info4b/projet/UserSide/test")));
 		@SuppressWarnings("unchecked")
 		CustomClass<String> cc = (CustomClass<String>) objectInputStream.readObject();
 		System.out.println(cc.toString());
 		sendObject(cc, serveur);
+		*/
 		
 		//initialise files
+		/*
 		File create = new File("Download");
 		if(!create.exists()) {
 			create.mkdir();
@@ -41,11 +45,15 @@ public class ClientMain{
 				writer.write("false\n");
 			} catch (IOException e) {e.printStackTrace();}
 		}
+		*/
 		
 		//get ip of server	
+		/*
 		System.out.println("Pour entrer l'adresse ip de votre serveur de sauvegarde, tapper 1\npour tester le programme sur un serveur local, tapper 2");
+		*/
 		boolean a = true;
 		String answer;
+		/*
 		String ip = "localhost";
 		while(a) {
 			answer = new Scanner(System.in).nextLine();
@@ -69,12 +77,15 @@ public class ClientMain{
 					System.out.println("Reponse invalide");
 			}
 		}
+		*/
 		//Socket serveur = new Socket(ip,4200);
-		//Socket serveur = new Socket("192.168.1.16",4200);
+		//Socket serveur = new Socket("192.168.1.100",4200);
 		
 		//log in process
 		String username;
 		String password;
+		
+		Scanner scanner = new Scanner(System.in);
 		
 		PrintWriter printWriter = new PrintWriter(new BufferedWriter( new OutputStreamWriter( serveur.getOutputStream() ) ), true);
 		
@@ -85,7 +96,7 @@ public class ClientMain{
 			switch(etat) {
 				case 1:
 					System.out.println("Rentrez votre nom d'utilisateur");
-					username = new Scanner(System.in).nextLine();
+					username = scanner.nextLine();
 					sendInfoCode(0, serveur);
 					
 					sendText(username, serveur);
@@ -99,7 +110,7 @@ public class ClientMain{
 					break;
 				case 2:
 					System.out.println("Rentrez votre mot de passe");
-					password = new Scanner(System.in).nextLine();
+					password = scanner.nextLine();
 					sendText(password, serveur);
 					if(dataInputStream.readBoolean()) {
 						a = false;
@@ -113,7 +124,7 @@ public class ClientMain{
 					System.out.println("Pour entrer le nom d'utilisateur une nouvelle fois, taper 1");
 					System.out.println("pour creer un nouveau compte, taper 2");
 					
-					answer = new Scanner(System.in).nextLine();
+					answer = scanner.nextLine();
 					if(answer.equals("1")) {
 						etat = 1;
 					}
@@ -127,7 +138,7 @@ public class ClientMain{
 				case 4:
 					sendInfoCode(1, serveur);
 					System.out.println("Rentrez un nom d'utilisateur");
-					username = new Scanner(System.in).nextLine();
+					username = scanner.nextLine();
 					sendText(username, serveur);
 					
 					if(dataInputStream.readBoolean()) {
@@ -139,7 +150,7 @@ public class ClientMain{
 					break;
 				case 5:
 					System.out.println("Rentrez un mot de passe");
-					password = new Scanner(System.in).nextLine();
+					password = scanner.nextLine();
 					sendText(password, serveur);
 					
 					etat = 1;

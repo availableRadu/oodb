@@ -7,10 +7,12 @@ public class ServerMain{
 		ServerSocket sock = new ServerSocket(4200);
 		
 		//initialise files
+		/*
 		File create = new File("stokaj");
 		if(!create.exists()) {
 			create.mkdir();
 		}
+		*/
 		
 		User utilisateurs = new User();
 		

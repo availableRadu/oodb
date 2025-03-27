@@ -5,3 +5,5 @@ javac ServerSide/*.java
 
 javac -d UserSide CustomClass.java
 javac UserSide/*.java
+
+pause

@@ -13,7 +13,7 @@ public class User{
 		password = new ArrayList<String>();
 		dataPath = new ArrayList<String>();
 		
-		File userDB = new File("userDB.java");
+		File userDB = new File("userDB");
 		if(!userDB.exists()) {
 			userDB.createNewFile();
 		}
@@ -35,7 +35,7 @@ public class User{
 		String fileSeparator = File.separator;
 		
 		try {
-		BufferedReader textBuff=new BufferedReader(new InputStreamReader(new FileInputStream("userDB.java")));
+		BufferedReader textBuff=new BufferedReader(new InputStreamReader(new FileInputStream("userDB")));
 		String ligne;
 		boolean i = true;
 		while ((ligne=textBuff.readLine())!=null){
@@ -56,7 +56,7 @@ public class User{
 	
 	private void writeDB(String pseudo, String password) throws IOException
 	{
-		BufferedWriter myWriter = new BufferedWriter(new FileWriter("userDB.java", true));
+		BufferedWriter myWriter = new BufferedWriter(new FileWriter("userDB", true));
 		myWriter.write(pseudo+"\n");
 		myWriter.write(password+"\n");
 		myWriter.close();
